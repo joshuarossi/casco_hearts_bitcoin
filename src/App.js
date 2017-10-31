@@ -5,14 +5,15 @@ import QRCode from 'qrcode.react';
 class App extends Component {
   constructor(props) {
     super(props);
+    const { address } = localStorage;
     this.state = {
       amount: '',
-      address: ''
+      address: address ? address : ''
     };
     this.handleSubmit = e => {
       e.preventDefault();
+      localStorage.setItem('address', this.state.address);
       this.setState({ amount: '', address: '' });
-      console.log(`bitcoin:${this.state.address}?amount=${this.state.amount}`);
     };
   }
   render() {
