@@ -1,29 +1,50 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
-const AddressInput = props => {
-  return (
-    <form>
-      Bitcoin Address: <input type="text" name="fname" />
-      <br />
-      <input type="submit" value="Submit" />
-    </form>
-  );
-};
+import QRCode from 'qrcode.react';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      amount: '',
+      address: ''
+    };
+    this.handleSubmit = e => {
+      e.preventDefault();
+      this.setState({ amount: '', address: '' });
+      console.log(`bitcoin:${this.state.address}?amount=${this.state.amount}`);
+    };
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <AddressInput />
+        <QRCode
+          value={`bitcoin:${this.state.address}?amount=${this.state.amount}`}
+        />;
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Bitcoin Address:
+            <input
+              type="text"
+              name="address"
+              value={this.state.address}
+              onChange={e => this.setState({ address: e.target.value })}
+            />
+          </label>
+          <br />
+          <input type="submit" value="Submit" />
+        </form>
+        <form onSubmit={e => e.preventDefault()}>
+          <label>
+            Amount:
+            <input
+              type="text"
+              name="amount"
+              value={this.state.amount}
+              onChange={e => this.setState({ amount: e.target.value })}
+            />
+          </label>
+        </form>
       </div>
     );
   }
