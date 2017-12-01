@@ -17,5 +17,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://github.com/joshuarossi/casco_hearts_bitcoin"
+  "homepage": "https://joshuarossi.github.io/casco_hearts_bitcoin/"
 }
